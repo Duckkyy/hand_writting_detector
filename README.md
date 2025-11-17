@@ -16,11 +16,11 @@ conda activate handwritting_detection
 ```
 
 ## 2. 環境変数（API Key を使用する場合）
-本プロジェクトは .env ファイルを使用して API Key を安全に管理しています。
+本プロジェクトは .env ファイルを使用して Gemini API Key を安全に管理しています。
 レポジトリには含まれないため、以下のように手動で作成してください。
 ```bash
 nano .env
-VLM_API_KEY="your-api-key"
+VLM_API_KEY="your-gemini-api-key"
 ```
 
 ## 3. 実行方法
