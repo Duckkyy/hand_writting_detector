@@ -6,6 +6,7 @@ import cv2
 import os
 import numpy as np
 import json
+import argparse
 
 def detect_handwritten_numbers(image_path, yolo_model_path, digit_model_path):
     # Step 1: Detect handwritten regions using YOLO
@@ -48,18 +49,43 @@ def retrieve_table_data(image_path):
 
     return table_data, fixed_cells
 
-def save_data_json(output_path="output.json"):
+def save_data_json(image_path, yolo_model_path, digit_model_path, output_path="output.json"):
     new_table = detect_handwritten_numbers(
-        image_path="image.png",
-        yolo_model_path="models/best.pt",
-        digit_model_path="models/mnist_cnn_pytorch.pth"
+        image_path=image_path,
+        yolo_model_path=yolo_model_path,
+        digit_model_path=digit_model_path
     )
     with open(output_path, "w") as f:
         json.dump(new_table, f, ensure_ascii=False, indent=4)
     print(f"Data saved to {output_path}")
 
+def build_arg_parser():
+    parser = argparse.ArgumentParser(description="Handwritten number correction pipeline")
+
+    parser.add_argument("--image", "-i", type=str, required=True, default='image.png',
+                        help="Path to input image (table photo).")
+
+    parser.add_argument("--yolo", "-y", type=str, required=True, default='models/best.pt',
+                        help="Path to YOLO model (e.g., best.pt).")
+
+    parser.add_argument("--digit", "-d", type=str, required=True, default='models/mnist_cnn_pytorch.pth',
+                        help="Path to digit classifier model (e.g., mnist pth).")
+
+    parser.add_argument("--output", "-o", type=str, default="output.json",
+                        help="Output path for JSON.")
+
+    return parser
+
 def run_pipeline():
-    save_data_json()
+    parser = build_arg_parser()
+    args = parser.parse_args()
+
+    save_data_json(
+        image_path=args.image,
+        yolo_model_path=args.yolo,
+        digit_model_path=args.digit,
+        output_path=args.output
+    )
 
 if __name__ == "__main__":
     run_pipeline()
