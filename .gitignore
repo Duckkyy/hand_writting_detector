@@ -1,0 +1,53 @@
+# ---- OS files ----
+.DS_Store
+Thumbs.db
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ---- Environment ----
+.env
+.env.*
+venv/
+.venv/
+env/
+ENV/
+
+# ---- Jupyter ----
+.ipynb_checkpoints/
+
+# ---- VSCode ----
+.vscode/
+
+# ---- Logs ----
+*.log
+
+# ---- Build ----
+build/
+dist/
+*.egg-info/
+
+# ---- Cache ----
+.cache/
+*.pickle
+*.pkl
+
+# ---- Python dotenv ----
+*.env
+
+# ---- PyTorch / ML ----
+*.pt
+*.pth
+*.onnx
+lightning_logs/
+wandb/
+
+# ---- Other editor ----
+.idea/
+
+# ---- Local data ----
+data/
+datasets/

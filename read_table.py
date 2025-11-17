@@ -1,9 +1,11 @@
+import os
 import cv2
 import numpy as np
 import pytesseract
 from paddleocr import PaddleOCR
 import json
 import re
+from dotenv import load_dotenv
 
 def vlm_json_to_dict(vlm_output: str):
     text = vlm_output.strip()
@@ -37,7 +39,8 @@ def read_table_vlm(image_path):
     import google.generativeai as gen
     from PIL import Image
 
-    gen.configure(api_key="AIzaSyD-HLbvD45nXcVX5wLH1fUUtDoL20IhKo0")
+    load_dotenv()
+    gen.configure(api_key=os.getenv("VLM_API_KEY"))
 
     img = Image.open(image_path)
 
